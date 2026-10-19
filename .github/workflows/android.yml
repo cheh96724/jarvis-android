@@ -1,17 +1,17 @@
 name: Build JARVIS APK
 
-on: 
+on:
 workflow_dispatch:
-push: 
-branches: [ "main" ]
+push:
+branches:
+- main
 
-jobs: 
+jobs:
 build:
 runs-on: ubuntu-latest
-
 steps:
-  - name: Checkout source
-    uses: actions/checkout@v4
+- name: Checkout source
+uses: actions/checkout@v4
 
   - name: Set up Java
     uses: actions/setup-java@v4
@@ -22,11 +22,12 @@ steps:
   - name: Set up Android SDK
     uses: android-actions/setup-android@v3
 
-  - name: Install Android SDK packages
+  - name: Install SDK packages
     run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
   - name: Check project files
     run: |
+      pwd
       ls -la
       test -f settings.gradle.kts -o -f settings.gradle
       test -f gradlew
